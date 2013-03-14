@@ -1,0 +1,100 @@
+﻿<Window x:Class="Lab3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow"
+        Height="552"
+        Width="840">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="150" />
+        </Grid.ColumnDefinitions>
+        <Grid Name="grid2"
+              Grid.Row="1"
+              Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Slider Value="2"
+                    Name="slider1"
+                    Minimum="0"
+                    Maximum="40"
+                    Orientation="Vertical"
+                    Grid.Row="1"
+                    TickPlacement="BottomRight" />
+            <Border BorderThickness="2"
+                    BorderBrush="Black"
+                    Name="grid1"
+                    Grid.Column="1"
+                    Grid.RowSpan="2">
+                <Grid MouseUp="canvas1_MouseUp"
+                      MouseMove="canvas1_MouseMove"
+                      MouseDown="canvas1_MouseDown"
+                      ClipToBounds="True">
+                    <Canvas Name="canvas1"
+                            Background="White"
+                            MouseWheel="canvas1_MouseWheel">
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="{Binding ElementName=slider1, Path=Value}"
+                                                ScaleY="{Binding ElementName=slider1, Path=Value}" />
+                            </TransformGroup>
+                        </Canvas.RenderTransform>
+                    </Canvas>
+                </Grid>
+            </Border>
+            <TextBlock Margin="0,0,4,0"
+                       HorizontalAlignment="Left"
+                       Text="{Binding ElementName=slider1, Path=Value}"
+                       VerticalAlignment="Top"
+                       Grid.RowSpan="2" />
+        </Grid>
+        <StackPanel Grid.Column="1"
+                    Margin="4"
+                    Name="stackPanel1">
+            <TextBlock Text="Введите условие:" />
+            <TextBox Name="conditionTB"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     Text="-5&lt;=x+8y&lt;=5"
+                     CharacterCasing="Lower"
+                     Height="93" />
+            <Button Content="Добавить условие"
+                    Name="button1"
+                    Click="button1_Click" />
+            <ListBox  Height="150"
+                      Name="listBox1" />
+            <Button Content="Очистить"
+                    Name="button2"
+                    Click="button2_Click" />
+            <StackPanel Name="goal_st">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="goal"
+                             Width="70" />
+                    <TextBlock Text="-->"
+                               Margin="0,6,0,0" />
+                    <StackPanel>
+                        <RadioButton Content="max"
+                                     Name="goal_max" />
+                        <RadioButton Content="min"
+                                     Name="goal_min" />
+                    </StackPanel>
+                </StackPanel>
+                <Button Content="Указать целевую функцию"
+                        Click="goal_Click" />
+            </StackPanel>
+            <StackPanel Name="goal_stClose"
+                        Visibility="Collapsed">
+                <TextBlock Name="goal_text"
+                           Text="f = x+y -> max" />
+                <Button Content="Выбрать другую"
+                        Click="goal_stClose_Click" />
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
