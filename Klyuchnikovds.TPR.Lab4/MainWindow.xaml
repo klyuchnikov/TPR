@@ -23,5 +23,9 @@
             <Canvas Name="canvas">
             </Canvas>
         </ScrollViewer>
+        <Label Content="Label" Name="path"
+               HorizontalAlignment="Left"
+               Margin="230,14,0,0"
+               VerticalAlignment="Top" />
     </Grid>
 </Window>

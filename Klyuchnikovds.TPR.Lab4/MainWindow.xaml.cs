@@ -98,6 +98,7 @@ namespace Klyuchnikovds.TPR.Lab4
                         mmm[current.X, i] = newStack;
                     }
                 } while (current.X < right.X);
+                path.Content = mmm[end.X, end.Y].GetTotalWeight;
                 PaintMap(map, mmm, countH, countV, mmm[end.X, end.Y]);
             }
             else
